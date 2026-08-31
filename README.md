@@ -1,16 +1,40 @@
-# KVHM Festival
+# Kennebec Valley House Music Festival
 
-A responsive one-page festival landing site for **KVHM Festival**, scheduled for **Sunday, September 20, 2026**.
+A public landing page for the free **Kennebec Valley House Music Festival**.
 
-## Files
+## Event
 
-- `index.html` — Page markup and festival copy
-- `styles.css` — Visual design and responsive styles
-- `script.js` — Countdown, mobile navigation, and email-form interaction
+- **Date:** Sunday, September 20, 2026
+- **Hours:** 2:00 PM–8:00 PM (Eastern time)
+- **Venue:** Mill Park Pavilion
+- **Address:** 1 Water St., Augusta, ME
+- **Admission:** Free Event
+- **Updates:** [@groovkulcha](https://www.instagram.com/groovkulcha/)
 
-## Preview locally
+## Visitor actions
 
-Open `index.html` in a browser, or use a local development server. For example, with Python installed:
+The page includes:
+
+- A **Get Directions** button that opens Google Maps for Mill Park Pavilion
+- A **Share Event** button that uses native device sharing where available, with a copy-link fallback
+- Instagram contact and announcement links
+
+## Separate KVHM backend
+
+This site uses the separate **KVHM Festival Backend** Supabase project, not Resonance Pulse Rewards.
+
+The public page sends limited anonymous event activity to the `festival-activity` endpoint:
+
+- `page_view`
+- `directions_click`
+- `share_click`
+- `instagram_click`
+
+No names, emails, precise location, sharing recipients, or message contents are collected by this feature. The endpoint accepts only the event slug, allowed action name, and an optional referrer domain. It does not provide public read access to event activity.
+
+## Local preview
+
+Open `index.html` directly in a browser, or run:
 
 ```bash
 python -m http.server 8000
@@ -18,27 +42,13 @@ python -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
-## Publish with GitHub Pages
+## GitHub Pages
 
-1. Open the repository on GitHub.
-2. Go to **Settings** → **Pages**.
-3. Under **Build and deployment**, select **Deploy from a branch**.
-4. Choose the `main` branch and `/ (root)` folder, then save.
-5. GitHub will provide the public site address once the deployment completes.
+1. In the GitHub repository, open **Settings** → **Pages**.
+2. Select **Deploy from a branch**.
+3. Choose `main` and `/ (root)`.
+4. Save and wait for GitHub Pages to deploy.
 
-## Before launch
+## Future edits
 
-Replace the placeholders in `index.html` with confirmed details:
-
-- Festival venue and city
-- Ticket provider URL
-- Artist lineup and schedule
-- Age policy and entry rules
-- Real Instagram, TikTok, and Facebook links
-- Official contact email
-
-The current email signup is a front-end confirmation only. Connect it to a Supabase table, form service, or mailing platform before collecting attendee emails.
-
-## Notes
-
-The countdown target in `script.js` is set to `2026-09-20T12:00:00`. Update the time if you want the timer to end at a specific gate-open or set-start time.
+Replace the “DJs to be announced” copy when the lineup is confirmed. The flyer can be added to an `assets/` folder when a repository upload route is available.
