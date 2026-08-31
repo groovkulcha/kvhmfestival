@@ -1,4 +1,4 @@
-const festivalDate = new Date("2026-09-20T12:00:00");
+const festivalDate = new Date("2026-09-20T14:00:00");
 
 function updateCountdown() {
   const distance = Math.max(0, festivalDate - new Date());
@@ -32,18 +32,4 @@ document.querySelectorAll(".site-nav a").forEach((link) => {
     navToggle?.setAttribute("aria-expanded", "false");
     navToggle?.setAttribute("aria-label", "Open navigation");
   });
-});
-
-const form = document.getElementById("email-form");
-const email = document.getElementById("email");
-const status = document.getElementById("form-status");
-form?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (!email.validity.valid) {
-    status.textContent = "Please enter a valid email address.";
-    email.focus();
-    return;
-  }
-  status.textContent = "You are on the list. Watch your inbox.";
-  form.reset();
 });
