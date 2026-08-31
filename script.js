@@ -53,14 +53,14 @@ document.querySelectorAll(".site-nav a").forEach((link) => {
 document.querySelectorAll(".directions-link").forEach((link) => link.addEventListener("click", () => track("directions_click")));
 document.querySelectorAll(".instagram-link").forEach((link) => link.addEventListener("click", () => track("instagram_click")));
 
-const shareButton = document.getElementById("share-event");
 const shareStatus = document.getElementById("share-status");
-shareButton?.addEventListener("click", async () => {
-  const shareData = {
-    title: "Kennebec Valley House Music Festival",
-    text: "Kennebec Valley House Music Festival — Sunday, September 20, 2026, 2:00 PM–8:00 PM at Mill Park Pavilion in Augusta, ME. Free event.",
-    url: window.location.href
-  };
+const shareData = {
+  title: "Kennebec Valley House Music Festival",
+  text: "Kennebec Valley House Music Festival — Sunday, September 20, 2026, 2:00 PM–8:00 PM at Mill Park Pavilion in Augusta, ME. Free event.",
+  url: window.location.href
+};
+
+async function shareEvent() {
   track("share_click");
   try {
     if (navigator.share) {
@@ -73,6 +73,28 @@ shareButton?.addEventListener("click", async () => {
   } catch (error) {
     if (error?.name !== "AbortError" && shareStatus) shareStatus.textContent = "Unable to share right now. Please copy the page link.";
   }
+}
+
+document.getElementById("share-event")?.addEventListener("click", shareEvent);
+document.getElementById("share-flyer")?.addEventListener("click", shareEvent);
+
+const flyerModal = document.getElementById("flyer-modal");
+const flyerCard = document.getElementById("flyer-card");
+const openFlyer = document.getElementById("open-flyer");
+const closeFlyer = document.getElementById("close-flyer");
+
+function showFlyer() {
+  if (flyerModal?.showModal) {
+    flyerModal.showModal();
+    track("flyer_open");
+  }
+}
+
+flyerCard?.addEventListener("click", showFlyer);
+openFlyer?.addEventListener("click", showFlyer);
+closeFlyer?.addEventListener("click", () => flyerModal?.close());
+flyerModal?.addEventListener("click", (event) => {
+  if (event.target === flyerModal) flyerModal.close();
 });
 
 track("page_view");
