@@ -4,3 +4,4 @@
   .flyer-section { padding-block: 4rem; }
   .flyer-card { width: min(78vw, 320px); }
 }
+@import url("lineup.css");
