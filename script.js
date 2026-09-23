@@ -43,38 +43,46 @@ document.addEventListener("DOMContentLoaded", () => {
     text: document.querySelector(".event-date")?.textContent?.trim() || "",
     url: window.location.href,
   };
+  const shareDialog = document.createElement("dialog");
+  shareDialog.className = "share-dialog";
+  shareDialog.innerHTML = `
+    <form method="dialog" class="share-dialog-card">
+      <button class="share-dialog-close" value="cancel" aria-label="Close share options">×</button>
+      <p class="eyebrow">Share the festival</p>
+      <h2>Copy the event link.</h2>
+      <input class="share-dialog-input" type="text" readonly aria-label="Event link">
+      <button class="button button-primary share-dialog-copy" type="button">Copy link</button>
+      <p class="share-dialog-status" aria-live="polite"></p>
+    </form>`;
+  document.body.appendChild(shareDialog);
+  const shareInput = shareDialog.querySelector(".share-dialog-input");
+  const shareDialogStatus = shareDialog.querySelector(".share-dialog-status");
+  shareInput.value = shareData.url;
 
-  async function shareEvent() {
-    if (typeof navigator.share === "function") {
-      await navigator.share(shareData);
-      return "Thanks for sharing the festival.";
+  function showShareDialog() {
+    if (typeof shareDialog.showModal === "function") {
+      shareDialog.showModal();
+    } else {
+      shareDialog.setAttribute("open", "");
     }
-
-    if (typeof navigator.clipboard?.writeText === "function") {
-      try {
-        await navigator.clipboard.writeText(shareData.url);
-        return "Event link copied.";
-      } catch {
-        // Fall through to the prompt when clipboard permissions are blocked.
-      }
-    }
-
-    window.prompt("Copy this event link:", shareData.url);
-    return "Event link ready to copy.";
+    shareInput.select();
   }
 
   shareButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      try {
-        const message = await shareEvent();
-        if (shareStatus) {
-          shareStatus.textContent = message;
-        }
-      } catch (error) {
-        if (error?.name !== "AbortError" && shareStatus) {
-          shareStatus.textContent = "Unable to share this event.";
-        }
+    button.addEventListener("click", showShareDialog);
+  });
+
+  shareDialog.querySelector(".share-dialog-copy").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+      shareDialogStatus.textContent = "Event link copied.";
+      if (shareStatus) {
+        shareStatus.textContent = "Event link copied.";
       }
-    });
+    } catch {
+      shareInput.focus();
+      shareInput.select();
+      shareDialogStatus.textContent = "Select the link and copy it.";
+    }
   });
 });
