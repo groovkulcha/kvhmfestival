@@ -2,7 +2,7 @@
 
 @media (max-width: 760px) {
   .flyer-section { padding-block: 4rem; }
-  .flyer-card { width: min(78vw, 320px); }
+  .flyer-card { width: min(100%, 450px); }
 }
 @import url("lineup.css");
 .share-dialog{width:min(92vw,560px);padding:0;border:1px solid var(--cyan);background:#0e1640;color:var(--paper);box-shadow:0 0 50px rgba(0,217,255,.25)}.share-dialog::backdrop{background:rgba(0,0,0,.78)}.share-dialog-card{position:relative;padding:2.5rem}.share-dialog-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:1px solid var(--cyan);border-radius:50%;background:var(--ink);color:var(--cyan);font-size:1.4rem;cursor:pointer}.share-dialog h2{margin:0 0 1.5rem;font-size:clamp(2rem,6vw,4rem);color:var(--paper)}.share-dialog-input{width:100%;margin-bottom:12px;padding:14px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.72rem}.share-dialog-copy{width:100%}.share-dialog-status{min-height:1.2em;margin:12px 0 0;color:var(--cyan);font-family:var(--mono);font-size:.7rem}
