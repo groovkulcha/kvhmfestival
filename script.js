@@ -45,17 +45,22 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   async function shareEvent() {
-    if (navigator.share) {
+    if (typeof navigator.share === "function") {
       await navigator.share(shareData);
       return "Thanks for sharing the festival.";
     }
 
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(shareData.url);
-      return "Event link copied.";
+    if (typeof navigator.clipboard?.writeText === "function") {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        return "Event link copied.";
+      } catch {
+        // Fall through to the prompt when clipboard permissions are blocked.
+      }
     }
 
-    throw new Error("Sharing is unavailable.");
+    window.prompt("Copy this event link:", shareData.url);
+    return "Event link ready to copy.";
   }
 
   shareButtons.forEach((button) => {
