@@ -4,10 +4,10 @@ A public landing page for the free **Kennebec Valley House Music Festival**.
 
 ## Event
 
-- **Date:** Sunday, September 20, 2026
-- **Hours:** 2:00 PM–8:00 PM (Eastern time)
+- **Date:** Saturday, October 10, 2026
+- **Hours:** 11:00 AM–6:00 PM (Eastern time)
 - **Venue:** Mill Park Pavilion
-- **Address:** 1 Water St., Augusta, ME
+- **Address:** Water St., Augusta, ME
 - **Admission:** Free Event
 - **Updates:** [@groovkulcha](https://www.instagram.com/groovkulcha/)
 
